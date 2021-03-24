@@ -7,6 +7,8 @@
 <body>
 <h1>Roll The Dice</h1>
 <h1 th:text="${dice}"></h1>
+<h1 th:text="${diceroll}"></h1>
+<h1 th:if="${correct}">This is the right number!</h1>
 <form action="/roll-dice" method="post">
     <input type="text" name="dice" class="field" value="1" />
     <button>Click me!</button>
