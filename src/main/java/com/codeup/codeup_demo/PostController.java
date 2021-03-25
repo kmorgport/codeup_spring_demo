@@ -1,24 +1,31 @@
 package com.codeup.codeup_demo;
 
+import models.Post;
 import org.springframework.stereotype.Controller;
+import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.ResponseBody;
 
+import java.util.ArrayList;
+import java.util.List;
+
 @Controller
 class PostController {
 
+    List<Post> posts = new ArrayList<>();
+
     @GetMapping("/posts")
-    @ResponseBody
-    public String posts() {
-        return "posts index page";
+    public String posts(Model model) {
+        posts.add(new Post("PS5", "new"));
+        model.addAttribute("posts",posts);
+        return "posts/index";
     }
 
     @GetMapping("/posts/{id}")
-    @ResponseBody
     public String postsId() {
-        return "view an individual post";
+        return "posts/show";
     }
 
     @GetMapping("/posts/create")
