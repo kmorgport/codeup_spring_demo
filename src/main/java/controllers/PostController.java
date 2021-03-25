@@ -1,4 +1,4 @@
-package com.codeup.codeup_demo;
+package controllers;
 
 import models.Post;
 import org.springframework.stereotype.Controller;
@@ -7,6 +7,7 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.ResponseBody;
+import repo.PostRepository;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -14,17 +15,30 @@ import java.util.List;
 @Controller
 class PostController {
 
-    List<Post> posts = new ArrayList<>();
+    private final PostRepository postDao;
+
+    public PostController(PostRepository postDao){
+        this.postDao = postDao;
+    }
+//    private final PostRepository postDao;
+//
+//    public PostController(PostRepository postDao){
+//        this.postDao = postDao;
+//    }
+
+//    List<Post> posts = new ArrayList<>();
 
     @GetMapping("/posts")
     public String posts(Model model) {
-        posts.add(new Post("PS5", "new"));
-        model.addAttribute("posts",posts);
+        List<Post> postsFromDB = postDao.findAll();
+//        posts.add(new Post("PS5", "new"));
+        model.addAttribute("posts",postsFromDB);
         return "posts/index";
     }
 
     @GetMapping("/posts/{id}")
-    public String postsId() {
+    public String postsId(@PathVariable int id, Model model) {
+        model.addAttribute("post", new Post("ipad","new"));
         return "posts/show";
     }
 
