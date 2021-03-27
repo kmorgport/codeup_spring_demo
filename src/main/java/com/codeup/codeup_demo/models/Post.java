@@ -1,6 +1,4 @@
-package models;
-
-import net.bytebuddy.dynamic.loading.InjectionClassLoader;
+package com.codeup.codeup_demo.models;
 
 import javax.persistence.*;
 
@@ -10,7 +8,7 @@ public class Post {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private Long id;
+    private long id;
 
     @Column(length = 225, nullable=false)
     private String title;
@@ -25,7 +23,7 @@ public class Post {
         this.body = body;
     }
 
-    public Post(Long id, String title, String body){
+    public Post(long id, String title, String body){
         this.id = id;
         this.title = title;
         this.body = body;

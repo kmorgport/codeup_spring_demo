@@ -1,15 +1,14 @@
-package controllers;
+package com.codeup.codeup_demo.controllers;
 
-import models.Post;
+import com.codeup.codeup_demo.models.Post;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.ResponseBody;
-import repo.PostRepository;
+import com.codeup.codeup_demo.repo.PostRepository;
 
-import java.util.ArrayList;
 import java.util.List;
 
 @Controller

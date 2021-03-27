@@ -1,6 +1,6 @@
-package repo;
+package com.codeup.codeup_demo.repo;
 
-import models.Post;
+import com.codeup.codeup_demo.models.Post;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.data.jpa.repository.Query;
 import org.springframework.data.repository.query.Param;
@@ -10,8 +10,8 @@ import java.util.List;
 
 @Repository
 public interface PostRepository extends JpaRepository<Post, Long> {
-//    List<Post> findByTitleEquals(String title);
+    List<Post> findByTitleEquals(String title);
 
-//    @Query("from POST post where post.body like %")
-//    List<Post> searchByTitleLike(@Param("term")String term);
+    @Query("from Post post where post.body like %:term%")
+    List<Post> searchByTitleLike(@Param("term")String term);
 }
