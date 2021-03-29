@@ -38,7 +38,7 @@ class PostController {
     }
 
     @GetMapping("/posts/{id}")
-    public String postsId(@PathVariable long id, Model model) {
+    public String postsId(@PathVariable Long id, Model model) {
         model.addAttribute("post", postDao.getOne(id));
         return "posts/show";
     }
@@ -59,7 +59,7 @@ class PostController {
     }
 
     @GetMapping("/posts/{id}/edit")
-    public String viewEdit(@PathVariable long id, Model model) {
+    public String viewEdit(@PathVariable Long id, Model model) {
 
         Post postFromDb = postDao.getOne(id);
         model.addAttribute("oldPost",postFromDb);
