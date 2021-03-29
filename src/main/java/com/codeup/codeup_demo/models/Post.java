@@ -1,6 +1,7 @@
 package com.codeup.codeup_demo.models;
 
 import javax.persistence.*;
+import java.security.acl.Owner;
 
 @Entity
 @Table(name = "posts")
@@ -15,6 +16,9 @@ public class Post {
 
     @Column(columnDefinition = "TEXT", length = 3000, nullable = false)
     private String body;
+
+    @OneToOne
+    private User owner;
 
     public Post(){}
 
@@ -49,6 +53,9 @@ public class Post {
     }
 
     public void setId(){
+    }
 
+    public void setOwner(User owner){
+        this.owner = owner;
     }
 }

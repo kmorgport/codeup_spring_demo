@@ -1,12 +1,11 @@
 package com.codeup.codeup_demo.controllers;
 
 import com.codeup.codeup_demo.models.Post;
+import com.codeup.codeup_demo.models.User;
+import com.codeup.codeup_demo.repo.UserRepository;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PathVariable;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.ResponseBody;
+import org.springframework.web.bind.annotation.*;
 import com.codeup.codeup_demo.repo.PostRepository;
 
 import java.util.List;
@@ -14,10 +13,13 @@ import java.util.List;
 @Controller
 class PostController {
 
-    private final PostRepository postDao;
+    private PostRepository postDao;
+    private UserRepository userDao;
 
-    public PostController(PostRepository postDao){
+    public PostController(PostRepository postDao, UserRepository userDao){
+
         this.postDao = postDao;
+        this.userDao = userDao;
     }
 //    private final PostRepository postDao;
 //
@@ -36,21 +38,47 @@ class PostController {
     }
 
     @GetMapping("/posts/{id}")
-    public String postsId(@PathVariable int id, Model model) {
-        model.addAttribute("post", new Post("ipad","new"));
+    public String postsId(@PathVariable long id, Model model) {
+        model.addAttribute("post", postDao.getOne(id));
         return "posts/show";
     }
 
     @GetMapping("/posts/create")
-    @ResponseBody
     public String viewCreate() {
-        return "view the form for creating a post";
+        return "posts/create";
     }
 
     @PostMapping("/posts/create")
     @ResponseBody
-    public String createPost() {
+    public String createPost(@RequestParam("post_title") String title,@RequestParam("post_description")String description) {
+        User user = userDao.getOne(1L);
+        Post newPost = new Post(title, description);
+        newPost.setOwner(user);
+        postDao.save(newPost);
         return "return a new post";
     }
 
+    @GetMapping("/posts/{id}/edit")
+    public String viewEdit(@PathVariable long id, Model model) {
+
+        Post postFromDb = postDao.getOne(id);
+        model.addAttribute("oldPost",postFromDb);
+
+        return "posts/edit";
+    }
+
+    @PostMapping("/posts/{id}/edit")
+    @ResponseBody
+    public String editPost(@RequestParam("post_title") String title,@RequestParam("post_description")String description) {
+        Post newPost = new Post(title, description);
+        postDao.save(newPost);
+        return "return a new post";
+    }
+
+    @PostMapping("/posts/{id}/delete")
+    @ResponseBody
+    public String deleteAd(@PathVariable long id){
+        postDao.deleteById(id);
+        return "You deleted an ad";
+    }
 }

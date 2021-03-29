@@ -10,6 +10,10 @@
     <div class="post" th:each="post : ${posts}">
         <h1 th:text="${post.getTitle()}"></h1>
         <p th:text="${post.getBody()}"></p>
+
+        <form th:action="${'/ads/'+ post.getId() +'/delete'}" method="POST">
+            <input type="submit" value="delete ad">
+        </form>
     </div>
 </main>
 </body>
