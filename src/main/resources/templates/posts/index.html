@@ -8,7 +8,7 @@
 <body>
 <main class="container">
     <div class="post" th:each="post : ${posts}">
-        <h1 th:text="${post.getTitle()}"></h1>
+        <a th:href="${'/posts/'+ post.id +'/show'}"><h1 th:text="${post.getTitle()}"></h1></a>
         <p th:text="${post.getBody()}"></p>
 
         <form th:action="${'/posts/'+ post.id +'/delete'}" method="POST">
