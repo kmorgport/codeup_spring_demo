@@ -43,19 +43,34 @@ class PostController {
         return "posts/show";
     }
 
+//    @GetMapping("/posts/create")
+//    public String viewCreate() {
+//        return "posts/create";
+//    }
+
     @GetMapping("/posts/create")
-    public String viewCreate() {
+    public String viewCreate(Model model) {
+        model.addAttribute("post",new Post());
+
         return "posts/create";
     }
 
+//    @PostMapping("/posts/create")
+//    @ResponseBody
+//    public String createPost(@RequestParam("post_title") String title,@RequestParam("post_description")String description) {
+//        User user = userDao.getOne(1L);
+//        Post newPost = new Post(title, description);
+//        newPost.setOwner(user);
+//        postDao.save(newPost);
+//        return "return a new post";
+//    }
+
     @PostMapping("/posts/create")
-    @ResponseBody
-    public String createPost(@RequestParam("post_title") String title,@RequestParam("post_description")String description) {
+    public String createPost(@ModelAttribute Post post) {
         User user = userDao.getOne(1L);
-        Post newPost = new Post(title, description);
-        newPost.setOwner(user);
-        postDao.save(newPost);
-        return "return a new post";
+        post.setOwner(user);
+        postDao.save(post);
+        return "posts/index";
     }
 
     @GetMapping("/posts/{id}/edit")

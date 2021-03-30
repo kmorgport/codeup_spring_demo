@@ -1,8 +1,11 @@
 package com.codeup.codeup_demo.models;
 
 import com.codeup.codeup_demo.util.Password;
+import org.springframework.web.bind.annotation.ModelAttribute;
+import org.springframework.web.bind.annotation.PostMapping;
 
 import javax.persistence.*;
+import java.util.List;
 
 @Entity
 @Table(name = "users")
@@ -12,6 +15,7 @@ public class User {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private long id;
 
+
     @Column(length = 225, nullable = false)
     private String username;
 
@@ -20,6 +24,9 @@ public class User {
 
     @Column(length = 225, nullable = false)
     private String password;
+
+    @OneToMany(cascade =CascadeType.ALL, mappedBy= "owner")
+    private List<Post> posts;
 
     public User() {
     }

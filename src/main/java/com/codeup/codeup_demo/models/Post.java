@@ -17,7 +17,8 @@ public class Post {
     @Column(columnDefinition = "TEXT", length = 3000, nullable = false)
     private String body;
 
-    @OneToOne
+    @ManyToOne
+    @JoinColumn(name = "owner_id")
     private User owner;
 
     public Post(){}
@@ -44,7 +45,7 @@ public class Post {
     public String getBody(){
         return this.body;
     }
-    public void setBody(String Body){
+    public void setBody(String body){
         this.body = body;
     }
 
