@@ -1,7 +1,6 @@
 package com.codeup.codeup_demo.models;
 
 import javax.persistence.*;
-import java.security.acl.Owner;
 
 @Entity
 @Table(name = "posts")

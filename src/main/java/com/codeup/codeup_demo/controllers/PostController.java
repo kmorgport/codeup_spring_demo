@@ -3,6 +3,7 @@ package com.codeup.codeup_demo.controllers;
 import com.codeup.codeup_demo.models.Post;
 import com.codeup.codeup_demo.models.User;
 import com.codeup.codeup_demo.repo.UserRepository;
+import com.codeup.codeup_demo.services.EmailService;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
@@ -15,11 +16,12 @@ class PostController {
 
     private PostRepository postDao;
     private UserRepository userDao;
+    private EmailService emailService;
 
-    public PostController(PostRepository postDao, UserRepository userDao){
-
+    public PostController(PostRepository postDao, UserRepository userDao, EmailService emailService){
         this.postDao = postDao;
         this.userDao = userDao;
+        this.emailService = emailService;
     }
 //    private final PostRepository postDao;
 //
@@ -69,7 +71,8 @@ class PostController {
     public String createPost(@ModelAttribute Post post) {
         User user = userDao.getOne(1L);
         post.setOwner(user);
-        postDao.save(post);
+        Post savePost = postDao.save(post);
+        emailService.prepareAndSend(savePost,"New Ad!", "A new post was created!");
         return "posts/index";
     }
 
