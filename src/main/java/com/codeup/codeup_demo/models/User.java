@@ -16,10 +16,10 @@ public class User {
     private long id;
 
 
-    @Column(length = 225, nullable = false)
+    @Column(length = 225, nullable = false, unique = true)
     private String username;
 
-    @Column(length = 225, nullable = false)
+    @Column(length = 225, nullable = false, unique = true)
     private String email;
 
     @Column(length = 225, nullable = false)
@@ -35,6 +35,13 @@ public class User {
         this.username = username;
         this.email = email;
         this.password = password;
+    }
+
+    public User(User copy){
+        id = copy.id;
+        email = copy.email;
+        username = copy.username;
+        password = copy.password;
     }
 
     public User(long id, String username, String email, String password) {
