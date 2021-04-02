@@ -25,16 +25,20 @@ public class User {
     @Column(length = 225, nullable = false)
     private String password;
 
+    @Column(length=225, nullable = false)
+    private String roles;
+
     @OneToMany(cascade =CascadeType.ALL, mappedBy= "owner")
     private List<Post> posts;
 
     public User() {
     }
 
-    public User(String username, String email, String password) {
+    public User(String username, String email, String password, String roles) {
         this.username = username;
         this.email = email;
         this.password = password;
+        this.roles = roles;
     }
 
     public User(User copy){
@@ -42,12 +46,14 @@ public class User {
         email = copy.email;
         username = copy.username;
         password = copy.password;
+        roles = copy.roles;
     }
 
-    public User(long id, String username, String email, String password) {
+    public User(long id, String username, String email, String password, String roles) {
         this.id = id;
         this.username = username;
         this.email = email;
+        this.roles = roles;
         this.password = password;
     }
 
@@ -69,6 +75,14 @@ public class User {
 
     public void setEmail(String email) {
         this.email = email;
+    }
+
+    public String getRoles() {
+        return roles;
+    }
+
+    public void setRoles(String roles) {
+        this.roles = roles;
     }
 
     public String getPassword() {

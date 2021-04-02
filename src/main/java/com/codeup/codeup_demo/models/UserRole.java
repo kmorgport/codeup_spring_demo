@@ -10,8 +10,9 @@ public class UserRole {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private long id;
 
-    @Column(name = "user_id")
-    private long userId;
+    @OneToOne
+    @JoinColumn(name = "owner_id")
+    private User owner;
 
     @Column(name = "role")
     private String role;
@@ -19,9 +20,9 @@ public class UserRole {
     public UserRole() {
     }
 
-    public UserRole(long id, long userId, String role) {
+    public UserRole(long id, String role) {
         this.id = id;
-        this.userId = userId;
+
         this.role = role;
     }
 
@@ -33,13 +34,6 @@ public class UserRole {
         this.id = id;
     }
 
-    public long getUserId() {
-        return userId;
-    }
-
-    public void setUserId(long userId) {
-        this.userId = userId;
-    }
 
     public String getRole() {
         return role;

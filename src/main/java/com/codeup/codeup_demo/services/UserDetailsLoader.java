@@ -5,6 +5,7 @@ import com.codeup.codeup_demo.models.UserRole;
 import com.codeup.codeup_demo.models.UserWithRoles;
 import com.codeup.codeup_demo.repo.Roles;
 import com.codeup.codeup_demo.repo.UserRepository;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.security.core.userdetails.UserDetailsService;
 import org.springframework.security.core.userdetails.UsernameNotFoundException;
@@ -24,11 +25,10 @@ public class UserDetailsLoader implements UserDetailsService {
     @Override
     public UserDetails loadUserByUsername(String username) throws UsernameNotFoundException {
         User user = userDao.findByUsername(username);
-        rolesDao.ofUserWith(username);
         if (user == null) {
             throw new UsernameNotFoundException("No user found for " + username);
         }
 
-        return new UserWithRoles(user);
+        return new UserWithRoles(user, rolesDao.ofUserWith(username));
     }
 }
