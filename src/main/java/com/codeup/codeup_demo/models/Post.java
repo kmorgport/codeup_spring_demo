@@ -8,7 +8,7 @@ public class Post {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private long id;
+    private Long id;
 
     @Column(length = 225, nullable=false)
     private String title;
@@ -52,7 +52,7 @@ public class Post {
         return this.id;
     }
 
-    public void setId(){
+    public void setId(Long id){
     }
 
     public void setOwner(User owner){

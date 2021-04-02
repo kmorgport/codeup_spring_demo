@@ -4,6 +4,7 @@ import com.codeup.codeup_demo.models.Post;
 import com.codeup.codeup_demo.models.User;
 import com.codeup.codeup_demo.repo.UserRepository;
 import com.codeup.codeup_demo.services.EmailService;
+import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
@@ -69,7 +70,7 @@ class PostController {
 
     @PostMapping("/posts/create")
     public String createPost(@ModelAttribute Post post) {
-        User user = userDao.getOne(1L);
+        User user = (User) SecurityContextHolder.getContext().getAuthentication().getPrincipal();
         post.setOwner(user);
         Post savePost = postDao.save(post);
         emailService.prepareAndSend(savePost,"New Ad!", "A new post was created!");
@@ -77,10 +78,11 @@ class PostController {
     }
 
     @GetMapping("/posts/{id}/edit")
-    public String viewEdit(@PathVariable Long id, Model model) {
-
-        Post postFromDb = postDao.getOne(id);
-        model.addAttribute("oldPost",postFromDb);
+    public String viewEdit(@ModelAttribute Post postToUpdate, @PathVariable Long id) {
+        User user = (User) SecurityContextHolder.getContext().getAuthentication().getPrincipal();
+        postToUpdate.setId(id);
+        postToUpdate.setOwner(user);
+        postDao.save(postToUpdate);
 
         return "posts/edit";
     }
