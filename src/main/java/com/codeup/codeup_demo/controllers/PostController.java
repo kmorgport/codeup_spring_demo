@@ -78,21 +78,20 @@ class PostController {
     }
 
     @GetMapping("/posts/{id}/edit")
-    public String viewEdit(@ModelAttribute Post postToUpdate, @PathVariable Long id) {
+    public String viewEdit(Model model, @PathVariable Long id) {
+        model.addAttribute("post",postDao.getOne(id));
+        return "/posts/index";
+    }
+
+    @PostMapping("/posts/{id}/edit")
+    @ResponseBody
+    public String editPost(@ModelAttribute Post postToUpdate, @PathVariable Long id) {
         User user = (User) SecurityContextHolder.getContext().getAuthentication().getPrincipal();
         postToUpdate.setId(id);
         postToUpdate.setOwner(user);
         postDao.save(postToUpdate);
 
         return "posts/edit";
-    }
-
-    @PostMapping("/posts/{id}/edit")
-    @ResponseBody
-    public String editPost(@RequestParam("post_title") String title,@RequestParam("post_description")String description) {
-        Post newPost = new Post(title, description);
-        postDao.save(newPost);
-        return "return a new post";
     }
 
     @PostMapping("/posts/{id}/delete")
