@@ -77,7 +77,8 @@ class PostController {
 
     @PostMapping("/posts/create")
     public String createPost(@ModelAttribute Post post) {
-        User user = (User) SecurityContextHolder.getContext().getAuthentication().getPrincipal();
+//        User user = (User) SecurityContextHolder.getContext().getAuthentication().getPrincipal();
+        User user = userDao.getOne(1L);
         post.setOwner(user);
         Post savePost = postDao.save(post);
         emailService.prepareAndSend(savePost,"New Ad!", "A new post was created!");

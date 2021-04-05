@@ -37,6 +37,7 @@ public class User {
     public User(String username, String email, String password, String roles) {
         this.username = username;
         this.email = email;
+//        setPassword(password);
         this.password = password;
         this.roles = roles;
     }
@@ -55,6 +56,7 @@ public class User {
         this.email = email;
         this.roles = roles;
         this.password = password;
+//        setPassword(password);
     }
 
     public long getId() {
@@ -91,5 +93,13 @@ public class User {
 
     public void setPassword(String password) {
         this.password = Password.hash(password);
+    }
+
+    public List<Post> getPosts() {
+        return posts;
+    }
+
+    public void setPosts(List<Post> posts) {
+        this.posts = posts;
     }
 }
