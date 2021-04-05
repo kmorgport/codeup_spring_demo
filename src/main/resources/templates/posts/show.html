@@ -10,7 +10,7 @@
         <p>Contact me at <span th:text="${post.owner.email}"></span></p>
     </div>
 
-    <form th:action="${'/post/'+ post.id +'/delete'}" method="POST">
+    <form th:action="${'/posts/'+ post.id +'/delete'}" method="POST">
         <input type="submit" value="delete ad">
     </form>
 

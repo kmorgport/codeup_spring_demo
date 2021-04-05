@@ -46,6 +46,13 @@ class PostController {
         return "posts/show";
     }
 
+    @PostMapping("/posts/{id}/show")
+    @ResponseBody
+    public String deleteAdOnShowPage(@PathVariable long id){
+        postDao.deleteById(id);
+        return "You deleted an ad";
+    }
+
 //    @GetMapping("/posts/create")
 //    public String viewCreate() {
 //        return "posts/create";
