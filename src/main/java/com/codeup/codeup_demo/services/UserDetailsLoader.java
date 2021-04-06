@@ -29,6 +29,7 @@ public class UserDetailsLoader implements UserDetailsService {
             throw new UsernameNotFoundException("No user found for " + username);
         }
 
-        return new UserWithRoles(user, rolesDao.ofUserWith(username));
+//        return new UserWithRoles(user, rolesDao.ofUserWith(username));
+        return new UserWithRoles(user);
     }
 }

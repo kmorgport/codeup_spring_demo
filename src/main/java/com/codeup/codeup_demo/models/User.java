@@ -5,6 +5,7 @@ import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PostMapping;
 
 import javax.persistence.*;
+import java.util.ArrayList;
 import java.util.List;
 
 @Entity
@@ -25,8 +26,8 @@ public class User {
     @Column(length = 225, nullable = false)
     private String password;
 
-    @Column(length=225, nullable = false)
-    private String roles;
+//    @OneToMany(cascade =CascadeType.ALL, mappedBy= "owner")
+//    private List<UserRole> roles;
 
     @OneToMany(cascade =CascadeType.ALL, mappedBy= "owner")
     private List<Post> posts;
@@ -34,27 +35,26 @@ public class User {
     public User() {
     }
 
-    public User(String username, String email, String password, String roles) {
-        this.username = username;
-        this.email = email;
-//        setPassword(password);
-        this.password = password;
-        this.roles = roles;
-    }
-
     public User(User copy){
         id = copy.id;
         email = copy.email;
         username = copy.username;
         password = copy.password;
-        roles = copy.roles;
+//        roles = copy.roles;
+    }
+
+
+    public User(String username, String email, String password) {
+        this.username = username;
+        this.email = email;
+//        setPassword(password);
+        this.password = password;
     }
 
     public User(long id, String username, String email, String password, String roles) {
         this.id = id;
         this.username = username;
         this.email = email;
-        this.roles = roles;
         this.password = password;
 //        setPassword(password);
     }
@@ -78,14 +78,14 @@ public class User {
     public void setEmail(String email) {
         this.email = email;
     }
-
-    public String getRoles() {
-        return roles;
-    }
-
-    public void setRoles(String roles) {
-        this.roles = roles;
-    }
+//
+//    public UserRole getRoles() {
+//        return roles;
+//    }
+//
+//    public void setRoles(String roles) {
+//        this.roles.add(roles);
+//    }
 
     public String getPassword() {
         return this.password;

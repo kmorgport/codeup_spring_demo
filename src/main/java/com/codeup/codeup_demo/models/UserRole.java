@@ -10,7 +10,7 @@ public class UserRole {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private long id;
 
-    @OneToOne
+    @ManyToOne
     @JoinColumn(name = "owner_id")
     private User owner;
 

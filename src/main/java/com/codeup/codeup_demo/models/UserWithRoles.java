@@ -26,14 +26,14 @@ public class UserWithRoles extends User implements UserDetails {
 //                .map(SimpleGrantedAuthority:: new)
 //                .collect(Collectors.toList());
 //    }
-
-    public UserWithRoles(User user, List<String> roles){
-        this.username = user.getUsername();
-        this.password = user.getPassword();
-        this.email = user.getEmail();
-        this.roles = roles;
-
-    }
+//
+//    public UserWithRoles(User user){
+//        this.username = user.getUsername();
+//        this.password = user.getPassword();
+//        this.email = user.getEmail();
+////        this.roles = roles;
+//
+//    }
 
     public UserWithRoles(User user){
         super(user);
@@ -50,15 +50,15 @@ public class UserWithRoles extends User implements UserDetails {
 
     }
 
-    @Override
-    public String getPassword(){
-        return this.password;
-    }
-
-    @Override
-    public String getEmail() {
-        return email;
-    }
+//    @Override
+//    public String getPassword(){
+//        return this.password;
+//    }
+//
+//    @Override
+//    public String getEmail() {
+//        return email;
+//    }
 
     @Override
     public Collection<? extends GrantedAuthority> getAuthorities() {
@@ -71,15 +71,15 @@ public class UserWithRoles extends User implements UserDetails {
 //        return authorities;
 //    }
 
-    @Override
-    public String getUsername() {
-        return this.username;
-    }
-
-    @Override
-    public void setUsername(String username) {
-        this.username = username;
-    }
+//    @Override
+//    public String getUsername() {
+//        return this.username;
+//    }
+//
+//    @Override
+//    public void setUsername(String username) {
+//        this.username = username;
+//    }
 
     @Override
     public boolean isAccountNonExpired() {
