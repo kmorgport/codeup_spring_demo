@@ -44,23 +44,27 @@ public class User {
     }
 
 
-    public User(String username, String email, String password) {
+    public User(String username, String email) {
         this.username = username;
         this.email = email;
 //        setPassword(password);
-        this.password = password;
+//        this.password = password;
     }
 
-    public User(long id, String username, String email, String password, String roles) {
+    public User(long id, String username, String email) {
         this.id = id;
         this.username = username;
         this.email = email;
-        this.password = password;
+//        this.password = password;
 //        setPassword(password);
     }
 
     public long getId() {
         return this.id;
+    }
+
+    public void setId(long id) {
+        this.id = id;
     }
 
     public String getUsername() {
@@ -91,10 +95,13 @@ public class User {
         return this.password;
     }
 
-    public void setPassword(String password) {
-        this.password = Password.hash(password);
-    }
+//    public void setPassword(String password) {
+//        this.password = Password.hash(password);
+//    }
 
+    public void setPassword(String password){
+        this.password = password;
+    }
     public List<Post> getPosts() {
         return posts;
     }

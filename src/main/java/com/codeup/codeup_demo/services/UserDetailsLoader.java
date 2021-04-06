@@ -15,11 +15,11 @@ import org.springframework.stereotype.Service;
 public class UserDetailsLoader implements UserDetailsService {
 
     private final UserRepository userDao;
-    private final Roles rolesDao;
+//    private final Roles rolesDao;
 
     public UserDetailsLoader(UserRepository userDao, Roles rolesDao) {
         this.userDao = userDao;
-        this.rolesDao = rolesDao;
+//        this.rolesDao = rolesDao;
     }
 
     @Override
